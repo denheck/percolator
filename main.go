@@ -7,7 +7,7 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/chromedp/chromedp"
-	"os" 
+	"os"
 	"strings"
 )
 
@@ -31,9 +31,9 @@ func main() {
 	}
 
 	for {
-		fmt.Print("percolator> ") 
+		fmt.Print("percolator> ")
 
-		text, err := reader.ReadString('\n') 
+		text, err := reader.ReadString('\n')
 
 		if err != nil {
 			log.Fatal(err)
@@ -42,18 +42,18 @@ func main() {
 		text = strings.Replace(text, "\n", "", -1)
 
 		switch {
-			case "help()" == text:
-				fmt.Println("Welcome to the Percolator!")
-			default:
-				var res []byte
+		case "help()" == text:
+			fmt.Println("Welcome to the Percolator!")
+		default:
+			var res []byte
 
-				err = chromedp.Run(ctx, chromedp.Evaluate(text, &res))
+			err = chromedp.Run(ctx, chromedp.Evaluate(text, &res))
 
-				if err != nil {
-					fmt.Println(err)
-				}
+			if err != nil {
+				fmt.Println(err)
+			}
 
-				fmt.Println(string(res)) 
+			fmt.Println(string(res))
 		}
 	}
 }
